@@ -1,0 +1,18 @@
+import User from '../models/User';
+
+class UserController {
+  // eslint-disable-next-line class-methods-use-this
+  async store(req, res) {
+    const userExists = await User.findOne({ where: { email: req.body.email } });
+
+    if (userExists) {
+      return res.status(400).json({ erro: 'User already exists' });
+    }
+
+    const { id, name, provider } = await User.create(req.body);
+
+    return res.json({ id, name, provider });
+  }
+}
+
+export default new UserController();
