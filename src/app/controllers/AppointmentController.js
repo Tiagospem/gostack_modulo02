@@ -64,6 +64,15 @@ class AppointmentController {
     }
 
     /**
+     * prevents marking for himself
+     */
+    if (req.userId === isProvider.id) {
+      return res
+        .status(401)
+        .json({ error: 'You cant create appointments to yourself' });
+    }
+
+    /**
      * transform string date in object
      * and check for past dates
      */
