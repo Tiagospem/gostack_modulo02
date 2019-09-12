@@ -60,7 +60,7 @@ class UserController {
     if (email !== user.email) {
       const userExists = await User.findOne({ where: { email } });
       if (userExists) {
-        return res.status(400).json({ erro: 'User already exists' });
+        return res.status(400).json({ erro: 'User email already exists' });
       }
     }
     // se o usuário estiver tentando alterar a senha
